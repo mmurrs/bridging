@@ -2,8 +2,8 @@ import { Button, Frog, TextInput } from 'frog'
 // import { neynar } from 'frog/hubs'
 import { handle } from 'frog/vercel'
 import { parseEther } from 'ethers';
-// import { devtools } from 'frog/dev';
-// import { serveStatic } from 'frog/serve-static';
+import { devtools } from 'frog/dev';
+import { serveStatic } from 'frog/serve-static';
 // Uncomment to use Edge Runtime.
 // export const config = {
 //   runtime: 'edge',
@@ -96,7 +96,7 @@ app.frame('/', (c) => {
     ),
     intents: [
       <TextInput placeholder="Value (ETH)" />,
-      <Button.Transaction target="/send-ether">Send Ether</Button.Transaction>,
+      <Button target="/send-ether">Send Ether</Button>,
     ]
   })
 })
@@ -122,8 +122,8 @@ app.transaction('/send-ether', (c) => {
   })
 })
 
-// if (import.meta.env?.MODE === 'development') devtools(app, { serveStatic })
-// else devtools(app, { assetsPath: '/.frog' })
+if (import.meta.env?.MODE === 'development') devtools(app, { serveStatic })
+else devtools(app, { assetsPath: '/.frog' })
 
 export const GET = handle(app)
 export const POST = handle(app)
